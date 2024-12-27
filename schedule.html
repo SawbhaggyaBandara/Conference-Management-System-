@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Conference Schedule</title>
+    <link rel="stylesheet" href="schedule.css">
+    <style>
+        /* Modal styling */
+        .modal {
+            display: none;
+            color:black;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 5px;
+            text-align: left;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        </style>
+</head>
+<body>
+
+<div class="main">
+        <div class="navbar">
+            <div class="logo">
+                <h1>Research Conference 2024</h1>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="aboutus.html">About</a></li>
+                    <li><a href="schedule.html">Schedule</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="log.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    <!-- Full-screen Background Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Online Conference 2024</h1>
+            <p>Join the best minds in the world of Technology, Science, and Business</p>
+            <a href="#schedule" class="hero-button">Explore the Schedule</a>
+        </div>
+    </section>
+
+    <!-- Conference Schedule Section -->
+    <section id="schedule" class="schedule-section">
+        <div class="container">
+            <h2>Conference Schedule</h2>
+            <p>Discover the exciting sessions and join your favorite speakers live!</p>
+            <!-- Day Tabs -->
+            <div class="tabs">
+                <div class="tab-button active" onclick="showDay('day1')">Day 1</div>
+                <div class="tab-button" onclick="showDay('day2')">Day 2</div>
+                <div class="tab-button" onclick="showDay('day3')">Day 3</div>
+            </div>
+
+            <!-- Schedule Content -->
+            <div id="day1" class="tab-content active">
+                <div class="schedule-card">
+                    <h4>09:00 AM - Session 1</h4>
+                    <p>By Dr. Henry</p>
+                    <a href="#" target="_blank" class="button" onclick="openModal('Day 1', '09:00 AM', 'Session 1')">Register</a>
+                </div>
+                <div class="schedule-card">
+                    <h4>11:00 AM - Session 2</h4>
+                    <p>By Dr. Alice Smith</p>
+                    <a href="#" target="_blank" class="button" onclick="openModal('Day 1', '10:00 AM', 'Keynote: Engineering and Technology')">Register</a>
+                </div>
+                <div class="schedule-card">
+                    <h4>02:00 PM - Session 3</h4>
+                    <p>By Dr. Rawkwon</p>
+                    <a href="#" target="_blank" class="button" onclick="openModal('Day 1', '10:00 AM', 'Keynote: Engineering and Technology')">Register</a>
+                </div>
+            </div>
+
+            <div id="day2" class="tab-content">
+                <div class="schedule-card">
+                    <h4>09:30 AM - Session 1</h4>
+                    <p>By Dr. Marie</p>
+                    <a href="#" target="_blank" class="button" onclick="openModal('Day 1', '10:00 AM', 'Keynote: Engineering and Technology')">Register</a>
+                </div>
+                <div class="schedule-card">
+                    <h4>11:00 AM -Session 2</h4>
+                    <p>By Dr Seedewi</p>
+                    <a href="#" target="_blank" class="button" onclick="openModal('Day 1', '10:00 AM', 'Keynote: Engineering and Technology')">Register</a>
+                </div>
+            </div>
+
+            <div id="day3" class="tab-content">
+                <div class="schedule-card">
+                    <h4>10:00 AM Session 1</h4>
+                    <p>By Dr. John Doe</p>
+                    <a href="#" target="_blank" class="button" onclick="openModal('Day 1', '10:00 AM', 'Keynote: Engineering and Technology')">Register</a>
+                </div>
+                <div class="schedule-card">
+                    <h4>01:00 PM -Session 2</h4>
+                    <p>By Dr. Henry</p>
+                    <a href="#" target="_blank" class="button" onclick="openModal('Day 1', '10:00 AM', 'Keynote: Engineering and Technology')">Register</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal -->
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3 id="modal-title"></h3>
+        <p id="modal-details"></p>
+        <form id="register-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
+
+    <script src="schedule.js"></script>
+
+    <script>
+        // Open modal and populate details
+        function openModal(day, time, session) {
+            document.getElementById("modal-title").innerText = `Register for ${session}`;
+            document.getElementById("modal-details").innerText = `${day}, ${time}`;
+            document.getElementById("registerModal").style.display = "block";
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById("registerModal").style.display = "none";
+        }
+        
+        document.getElementById("register-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const details = document.getElementById("modal-details").innerText;
+
+    fetch("register_email.php", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        name: name,
+        email: email,
+        details: details,
+    }),
+})
+    .then((response) => response.text()) // Log raw text response
+    .then((rawData) => {
+        console.log("Raw Response:", rawData);
+        try {
+            const jsonData = JSON.parse(rawData); // Parse JSON
+            if (jsonData.status === "success") {
+                alert("Registration successful! Check your email for the QR code.");
+            } else {
+                alert("Error: " + jsonData.message);
+            }
+        } catch (error) {
+            console.error("JSON Parse Error:", error.message);
+            alert("Invalid JSON response: " + rawData); // Display raw response for debugging
+        }
+    })
+    .catch((error) => {
+        console.error("Network Error:", error.message);
+        alert("An error occurred: " + error.message);
+    });
+
+
+    closeModal();
+});
+
+
+
+        </script>
+</body>
+</html>
